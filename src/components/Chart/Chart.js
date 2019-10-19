@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis,
+    Tooltip, CartesianGrid, Legend } from 'recharts';
 
 class Chart extends Component {
     static propTypes = {
@@ -9,15 +10,25 @@ class Chart extends Component {
 
     render() {
         return (
-            <LineChart width={730} height={250} data={this.props.data}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="bitcoin" stroke="#8884d8" />
-            </LineChart>
+            <ResponsiveContainer height={300}>
+                <LineChart width={720} height={300} data={this.props.data}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis
+                        dataKey="timestamp"
+                        tickFormatter={timestamp => new Date(timestamp).toLocaleTimeString('sv-SE')}
+                    />
+                    <YAxis type="number" domain={['dataMin - 5', 'dataMax + 5']} />
+                    <Tooltip
+                        formatter={value => "$" + value}
+                        labelFormatter={
+                            timestamp =>new Date(timestamp).toLocaleTimeString('sv-SE')
+                        }
+                    />
+                    <Legend />
+                    <Line type="monotone" dataKey="bitcoin" dot={false} stroke="#8884d8" />
+                </LineChart>
+            </ResponsiveContainer>
         );
     }
 }
