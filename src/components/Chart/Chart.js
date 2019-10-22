@@ -11,18 +11,22 @@ class Chart extends Component {
     render() {
         return (
             <ResponsiveContainer height={300}>
-                <LineChart width={720} height={300} data={this.props.data}
+                <LineChart data={this.props.data}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis
                         dataKey="timestamp"
                         tickFormatter={timestamp => new Date(timestamp).toLocaleTimeString('sv-SE')}
                     />
-                    <YAxis type="number" domain={['dataMin - 5', 'dataMax + 5']} />
+                    <YAxis
+                        type="number"
+                        domain={['dataMin - 5', 'dataMax + 5']}
+                        tickFormatter={value => value.toFixed(2)}
+                    />
                     <Tooltip
                         formatter={value => "$" + value}
                         labelFormatter={
-                            timestamp =>new Date(timestamp).toLocaleTimeString('sv-SE')
+                            timestamp => new Date(timestamp).toLocaleTimeString('sv-SE')
                         }
                     />
                     <Legend />
