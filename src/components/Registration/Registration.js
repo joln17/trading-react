@@ -76,7 +76,7 @@ class Registration extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to='/verify-admin' />;
+            return <Redirect to='/deposit' />;
         }
         return (
             <Container>
@@ -86,7 +86,7 @@ class Registration extends Component {
                     </Col>
                     <Col md={{ span: 4, offset: 4 }}>
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="formBasicName">
+                            <Form.Group controlId="formName">
                                 <Form.Label>Namn</Form.Label>
                                 <Form.Control
                                     type="text"
@@ -98,7 +98,7 @@ class Registration extends Component {
                                 />
                             </Form.Group>
 
-                            <Form.Group controlId="formBasicDate">
+                            <Form.Group controlId="formDate">
                                 <Form.Label>Födelsedatum</Form.Label>
                                 <DatePicker
                                     onChange={this.log}
@@ -108,7 +108,7 @@ class Registration extends Component {
                                 />
                             </Form.Group>
 
-                            <Form.Group controlId="formBasicEmail">
+                            <Form.Group controlId="formEmail">
                                 <Form.Label>Epost<span className="red-text">*</span></Form.Label>
                                 <Form.Control
                                     type="email"
@@ -119,7 +119,7 @@ class Registration extends Component {
                                 />
                             </Form.Group>
 
-                            <Form.Group controlId="formBasicPassword">
+                            <Form.Group controlId="formPassword">
                                 <Form.Label>Lösenord<span className="red-text">*</span></Form.Label>
                                 <InputGroup>
                                     <Form.Control
