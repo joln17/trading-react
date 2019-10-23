@@ -30,7 +30,7 @@ class Chart extends Component {
                         }
                     />
                     <Legend />
-                    <Line type="monotone" dataKey="bitcoin" dot={false} stroke="#8884d8" />
+                    <Line type="monotone" dataKey="value" dot={false} stroke="#8884d8" />
                 </LineChart>
             </ResponsiveContainer>
         );

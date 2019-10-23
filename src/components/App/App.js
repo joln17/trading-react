@@ -13,44 +13,38 @@ class App extends Component {
 
     constructor(props) {
         super(props);
+        this.getHistory = this.getHistory.bind(this);
         this.state = {
-            rtData: { timestamp: 0 },
-            data: [],
-            lastTS: 0
+            connected: false,
+            histData: {},
+            rtData: { timestamp: 0 }
         };
+    }
+
+    getHistory(asset) {
+        console.log(asset);
+        this.ws.send('getHistory');
     }
 
     componentDidMount() {
         this.ws.onopen = () => {
             console.log('Connected.');
-            this.ws.send('getHistory');
+            this.setState({ connected: true });
         };
         this.ws.onmessage = event => {
-            let currentTS;
             const message = JSON.parse(event.data);
 
             if (message.rtData) {
                 this.setState({ rtData: message.rtData });
             }
-
-            if (this.state.data.length === 0 && message.histData) {
-                // Get historical data before making realtime updates
-                this.setState({ data: this.state.data.concat(message.histData) });
-            } else if (this.state.data.length !== 0 && message.rtData) {
-                // Get realtime updates
-                currentTS = this.state.data[this.state.data.length - 1].timestamp;
-                if (message.rtData.timestamp - currentTS >= 10000) {
-                    this.setState({ data: this.state.data.concat(message.rtData) });
-                }
-            }
-
-            if (this.state.data.length > 720) {
-                this.setState({ data: this.state.data.slice(1) });
+            if (message.histData) {
+                this.setState({ histData: message.histData });
             }
         };
 
         this.ws.onclose = () => {
             console.log('Disconnected.');
+            this.setState({ connected: false });
             // automatically try to reconnect on connection loss
         };
     }
@@ -61,7 +55,15 @@ class App extends Component {
                 <Switch>
                     <Route
                         exact path='/'
-                        render={(props) => <Home {...props} data={this.state.data} />}
+                        render={(props) =>
+                            <Home
+                                {...props}
+                                connected={this.state.connected}
+                                getHistory={this.getHistory}
+                                histData={this.state.histData}
+                                rtData={this.state.rtData}
+                            />
+                        }
                     />
                     <Route
                         exact path='/holdings'
