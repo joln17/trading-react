@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Col, Container, Row } from 'react-bootstrap';
 
-import Chart from '../Chart/Chart';
+import Chart from './Chart';
 
 class Asset extends Component {
     static propTypes = {
