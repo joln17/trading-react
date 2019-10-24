@@ -8,7 +8,7 @@ import HoldingsTable from './HoldingsTable';
 
 class Holdings extends Component {
     static propTypes = {
-        priceData: PropTypes.object
+        priceData: PropTypes.object.isRequired
     };
 
     constructor(props) {

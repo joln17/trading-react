@@ -5,7 +5,7 @@ import { ResponsiveContainer, LineChart, Line, XAxis, YAxis,
 
 class Chart extends Component {
     static propTypes = {
-        data: PropTypes.array
+        data: PropTypes.array.isRequired
     };
 
     render() {

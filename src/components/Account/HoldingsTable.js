@@ -4,8 +4,8 @@ import { Table } from 'react-bootstrap';
 
 class HoldingsTable extends Component {
     static propTypes = {
-        priceData: PropTypes.object,
-        holdings: PropTypes.array
+        priceData: PropTypes.object.isRequired,
+        holdings: PropTypes.array.isRequired
     };
 
     render() {
