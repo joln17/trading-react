@@ -73,7 +73,7 @@ class Deposit extends Component {
             return null;
         }
         if (this.state.redirect) {
-            return <Redirect to='/' />;
+            return <Redirect to='/holdings' />;
         }
         return (
             <Container>
