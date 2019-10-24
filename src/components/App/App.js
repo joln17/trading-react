@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Home from '../Home/Home';
+import Asset from '../Asset/Asset';
 import Holdings from '../Account/Holdings';
 import Deposit from '../Account/Deposit';
 import Registration from '../Registration/Registration';
@@ -23,7 +23,7 @@ class App extends Component {
 
     getHistory(asset) {
         console.log(asset);
-        this.ws.send('getHistory');
+        this.ws.send(asset);
     }
 
     componentDidMount() {
@@ -54,9 +54,9 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route
-                        exact path='/'
+                        exact path='/asset/:asset'
                         render={(props) =>
-                            <Home
+                            <Asset
                                 {...props}
                                 connected={this.state.connected}
                                 getHistory={this.getHistory}

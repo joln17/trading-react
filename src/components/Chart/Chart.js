@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis,
-    Tooltip, CartesianGrid, Legend } from 'recharts';
+    Tooltip, CartesianGrid} from 'recharts';
 
 class Chart extends Component {
     static propTypes = {
+        asset: PropTypes.string.isRequired,
         data: PropTypes.array.isRequired
     };
 
@@ -20,16 +21,15 @@ class Chart extends Component {
                     />
                     <YAxis
                         type="number"
-                        domain={['dataMin - 5', 'dataMax + 5']}
+                        domain={['dataMin - 1', 'dataMax + 1']}
                         tickFormatter={value => value.toFixed(2)}
                     />
                     <Tooltip
-                        formatter={value => "$" + value}
+                        formatter={value => ["$" + value, this.props.asset]}
                         labelFormatter={
-                            timestamp => new Date(timestamp).toLocaleTimeString('sv-SE')
+                            timestamp => "time: " + new Date(timestamp).toLocaleTimeString('sv-SE')
                         }
                     />
-                    <Legend />
                     <Line type="monotone" dataKey="value" dot={false} stroke="#8884d8" />
                 </LineChart>
             </ResponsiveContainer>
