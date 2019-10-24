@@ -8,7 +8,9 @@ import HoldingsTable from './HoldingsTable';
 
 class Holdings extends Component {
     static propTypes = {
-        priceData: PropTypes.object.isRequired
+        connected: PropTypes.bool.isRequired,
+        getCurrentData: PropTypes.func.isRequired,
+        currentData: PropTypes.object.isRequired
     };
 
     constructor(props) {
@@ -19,6 +21,10 @@ class Holdings extends Component {
     }
 
     componentDidMount() {
+        if (this.props.connected) {
+            this.props.getCurrentData();
+        }
+
         const urlHoldings = config.baseURL + '/account/holdings';
 
         fetch(urlHoldings, {
@@ -40,8 +46,14 @@ class Holdings extends Component {
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.connected && !prevProps.connected) {
+            this.props.getCurrentData();
+        }
+    }
+
     render() {
-        if (!this.state.holdings || this.props.priceData.timestamp === 0) {
+        if (!this.state.holdings || Object.entries(this.props.currentData).length === 0) {
             return null;
         }
 
@@ -51,7 +63,7 @@ class Holdings extends Component {
                     <Col md={{ span: 6, offset: 3 }}>
                         <h1 className="center">Innehav</h1>
                         <HoldingsTable
-                            priceData={this.props.priceData}
+                            currentData={this.props.currentData}
                             holdings={this.state.holdings}
                         />
                     </Col>

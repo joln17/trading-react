@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 
 class HoldingsTable extends Component {
     static propTypes = {
-        priceData: PropTypes.object.isRequired,
+        currentData: PropTypes.object.isRequired,
         holdings: PropTypes.array.isRequired
     };
 
@@ -30,21 +30,23 @@ class HoldingsTable extends Component {
             return 0;
         });
 
-        const holdingRows = holdings.map((security, index) => {
-            let name = security.name.charAt(0).toUpperCase() + security.name.slice(1);
-            const currentPrice = +this.props.priceData[security.name];
-            const value = currentPrice * security.quantity;
-            const change = 100 * ((currentPrice - security.price) / security.price);
+        const holdingRows = holdings.map((asset, index) => {
+            let name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
+            const currentPrice = +this.props.currentData[asset.name].value;
+            const value = currentPrice * asset.quantity;
+            const change = 100 * ((currentPrice - asset.price) / asset.price);
 
             totalValue += value;
 
-            return <tr key={index}>
-                <td>{name}</td>
-                <td className="right">{security.quantity}</td>
-                <td className="right">${currentPrice.toFixed(2)}</td>
-                <td className="right">{change.toFixed(2)} %</td>
-                <td className="right">${value.toFixed(2)}</td>
-            </tr>;
+            return (
+                <tr key={index}>
+                    <td>{name}</td>
+                    <td className="right">{asset.quantity}</td>
+                    <td className="right">${currentPrice.toFixed(2)}</td>
+                    <td className="right">{change.toFixed(2)} %</td>
+                    <td className="right">${value.toFixed(2)}</td>
+                </tr>
+            );
         });
 
         return (
