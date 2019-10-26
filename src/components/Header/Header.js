@@ -3,24 +3,12 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 
-//import headerImg from '../../assets/images/header_1920.jpg';
-
 import './Header.css';
 
 class Header extends Component {
     static propTypes = {
         location: PropTypes.object.isRequired
     };
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            adminOption: null,
-            titlesFetched: null,
-            loginMenu: 'Logga in',
-            isLoggedIn: false
-        };
-    }
 
     render() {
         let holdingsNav = null, depositNav = null, loginNav;
