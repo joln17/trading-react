@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-//import Listings from '../Listings/Listings';
+import Listings from '../Listings/Listings';
 import Asset from '../Asset/Asset';
 import Holdings from '../Account/Holdings';
 import Deposit from '../Account/Deposit';
@@ -28,6 +28,7 @@ class App extends Component {
         this.state = {
             connected: false,
             currentData: {},
+            rtData: {},
             ...assetsHist,
             ...assetsRt
         };
@@ -56,7 +57,7 @@ class App extends Component {
                 assetHist = message.rtData.asset + 'Hist';
                 assetRt = message.rtData.asset + 'Rt';
                 rtData = message.rtData.data;
-                this.setState({ [assetRt]: rtData });
+                this.setState({ [assetRt]: rtData, rtData: message.rtData });
 
                 if (this.state[assetHist].length > 0) {
                     currentTS = this.state[assetHist][this.state[assetHist].length - 1].timestamp;
@@ -64,7 +65,6 @@ class App extends Component {
                     if (rtData.timestamp - currentTS >= interval * 1000) {
                         timeDiff = rtData.timestamp - this.state[assetHist][0].timestamp;
                         index = timeDiff >= maxTime * 1000 ? 1 : 0;
-
                         this.setState(prevState => ({
                             [assetHist]: [...prevState[assetHist].slice(index), rtData]
                         }));
@@ -109,6 +109,19 @@ class App extends Component {
             <Router>
                 <Switch>
                     {assetRoutes}
+                    <Route
+                        exact path='/'
+                        render={(props) =>
+                            <Listings
+                                {...props}
+                                connected={this.state.connected}
+                                assets={this.assets}
+                                getCurrentData={this.getCurrentData}
+                                currentData={this.state.currentData}
+                                rtData={this.state.rtData}
+                            />
+                        }
+                    />
                     <Route
                         exact path='/holdings'
                         render={(props) =>
