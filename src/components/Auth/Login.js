@@ -17,7 +17,7 @@ class Login extends Component {
             passwordInput: '',
             passwordInputType: 'password',
             passwordInputIcon: 'visibility',
-            redirect: false
+            redirect: ''
         };
     }
 
@@ -57,7 +57,7 @@ class Login extends Component {
         }).then(result => {
             if (result.data && result.data.token) {
                 localStorage.setItem('token', result.data.token);
-                this.setState({ redirect: true });
+                this.setState({ redirect: '/holdings' });
             } else if (result.error) {
                 console.log(result.error);
             }
@@ -68,7 +68,7 @@ class Login extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to='/holdings' />;
+            return <Redirect to={this.state.redirect} />;
         }
         return (
             <Container>

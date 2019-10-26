@@ -19,7 +19,7 @@ class Registration extends Component {
             birthdateInput: '',
             passwordInputType: 'password',
             passwordInputIcon: 'visibility',
-            redirect: false
+            redirect: ''
         };
     }
 
@@ -67,7 +67,7 @@ class Registration extends Component {
         }).then(result => {
             if (result.data && result.data.token) {
                 localStorage.setItem('token', result.data.token);
-                this.setState({ redirect: true });
+                this.setState({ redirect: '/deposit' });
             }
         }).catch(error => {
             console.log("Request failed due to the following error: ", error.message);
@@ -76,7 +76,7 @@ class Registration extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to='/deposit' />;
+            return <Redirect to={this.state.redirect} />;
         }
         return (
             <Container>
