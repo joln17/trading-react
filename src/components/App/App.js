@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import Header from '../Header/Header';
 import Listings from '../Listings/Listings';
 import Asset from '../Asset/Asset';
 import Holdings from '../Account/Holdings';
@@ -107,6 +108,7 @@ class App extends Component {
 
         return (
             <Router>
+                <Header />
                 <Switch>
                     {assetRoutes}
                     <Route
