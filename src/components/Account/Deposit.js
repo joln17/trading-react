@@ -10,9 +10,9 @@ class Deposit extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            isLoggedIn: false,
             quantityInput: '',
-            redirect: false
+            redirect: '',
+            isLoggedIn: false
         };
     }
 
@@ -37,9 +37,14 @@ class Deposit extends Component {
             return response.json();
         }).then(result => {
             if (result.data) {
-                this.setState({ redirect: true });
+                this.setState({ redirect: '/holdings' });
             } else if (result.error) {
-                console.log(result.error);
+                if (result.error.message === "Failed authentication") {
+                    localStorage.removeItem('token');
+                    this.setState({ redirect: '/login' });
+                } else {
+                    console.log(result.error);
+                }
             }
         }).catch(error => {
             console.log("Request failed due to the following error: ", error.message);
@@ -61,7 +66,12 @@ class Deposit extends Component {
             if (result.data) {
                 this.setState({ isLoggedIn: true });
             } else if (result.error) {
-                console.log(result.error);
+                if (result.error.message === "Failed authentication") {
+                    localStorage.removeItem('token');
+                    this.setState({ redirect: '/login' });
+                } else {
+                    console.log(result.error);
+                }
             }
         }).catch(error => {
             console.log("Request failed due to the following error: ", error.message);
@@ -69,11 +79,10 @@ class Deposit extends Component {
     }
 
     render() {
-        if (!this.state.isLoggedIn) {
-            return null;
-        }
         if (this.state.redirect) {
-            return <Redirect to='/holdings' />;
+            return <Redirect to={this.state.redirect} />;
+        } else if (!this.state.isLoggedIn) {
+            return null;
         }
         return (
             <Container>

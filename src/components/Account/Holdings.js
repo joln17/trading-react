@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import config from '../../config';
@@ -16,7 +17,8 @@ class Holdings extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            holdings: null
+            holdings: null,
+            redirect: ''
         };
     }
 
@@ -39,7 +41,12 @@ class Holdings extends Component {
             if (result.data) {
                 this.setState({ holdings: result.data });
             } else if (result.error) {
-                console.log(result.error);
+                if (result.error.message === "Failed authentication") {
+                    localStorage.removeItem('token');
+                    this.setState({ redirect: '/login' });
+                } else {
+                    console.log(result.error);
+                }
             }
         }).catch(error => {
             console.log("Request failed due to the following error: ", error.message);
@@ -53,6 +60,9 @@ class Holdings extends Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />;
+        }
         if (!this.state.holdings || Object.entries(this.props.currentData).length === 0) {
             return null;
         }
