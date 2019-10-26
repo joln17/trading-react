@@ -10,9 +10,11 @@ import Registration from '../Registration/Registration';
 import Login from '../Auth/Login';
 import Logout from '../Auth/Logout';
 
+import config from '../../config';
+
 class App extends Component {
     assets = ['bitcoin', 'ethereum', 'litecoin'];
-    ws = new WebSocket('ws://localhost:8300');
+    ws = new WebSocket(config.wsURL);
 
     constructor(props) {
         super(props);
