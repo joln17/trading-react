@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
 class HoldingsTable extends Component {
@@ -30,17 +31,17 @@ class HoldingsTable extends Component {
             return 0;
         });
 
-        const holdingRows = holdings.map((asset, index) => {
-            let name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
-            const currentPrice = +this.props.currentData[asset.name].value;
+        const holdingRows = holdings.map((asset, key) => {
+            const name = asset.name.charAt(0).toUpperCase() + asset.name.slice(1);
+            const currentPrice = +this.props.currentData.price[asset.name];
             const value = currentPrice * asset.quantity;
             const change = 100 * ((currentPrice - asset.price) / asset.price);
 
             totalValue += value;
 
             return (
-                <tr key={index}>
-                    <td>{name}</td>
+                <tr key={key}>
+                    <td><Link to={'/asset/' + asset.name}>{name}</Link></td>
                     <td className="right">{asset.quantity}</td>
                     <td className="right">${currentPrice.toFixed(2)}</td>
                     <td className="right">{change.toFixed(2)} %</td>
@@ -50,7 +51,7 @@ class HoldingsTable extends Component {
         });
 
         return (
-            <Table striped bordered hover size="sm">
+            <Table responsive="sm" striped bordered hover size="sm">
                 <thead>
                     <tr>
                         <th>Namn</th>
