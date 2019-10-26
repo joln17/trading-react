@@ -36,6 +36,10 @@ code {
     font-size: 1rem;
 }
 
+.toolbar-button {
+    margin: .25rem;
+}
+
 .red-text {
     color: red;
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import Chart from './Chart';
+import Trade from './Trade';
 
 class Asset extends Component {
     static propTypes = {
@@ -35,6 +36,7 @@ class Asset extends Component {
                             ${this.props.rtData.value}
                         </h1>
                     </Col>
+                    <Trade asset={this.props.asset} rtData={this.props.rtData} />
                 </Row>
             </Container>
         );
