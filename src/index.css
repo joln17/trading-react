@@ -1,5 +1,6 @@
 html {
     overflow-y: scroll;
+    background: linear-gradient(to right, rgb(200, 200, 200), rgba(200, 200, 200, 0.1));
 }
 
 body {
@@ -9,11 +10,49 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: inherit;
 }
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
+}
+
+.btn-primary {
+    background-color: #42895C;
+    border-color: #42895C;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open>.dropdown-toggle.btn-primary,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle,
+.open>.dropdown-toggle.btn-primary {
+    background-color: #316745;
+    border-color: #316745;
+}
+
+.btn-primary.focus,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem #82ca9d;
+    border-color: #316745;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 .2rem #82ca9d;
+    border-color: #316745;
+}
+
+h1 {
+    margin-bottom: 2rem;
 }
 
 .center {
@@ -32,12 +71,24 @@ code {
     flex-wrap: nowrap;
 }
 
+.card {
+    padding: 1rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+    min-height: 460px;
+    background-color: #fff;
+}
+
+.form-button {
+    margin: 1rem auto;
+}
+
 .form-input.material-icons {
     font-size: 1rem;
 }
 
 .toolbar-button {
-    margin: .25rem;
+    margin: 1rem .25rem;
 }
 
 .red-text {

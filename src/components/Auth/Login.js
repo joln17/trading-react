@@ -73,10 +73,8 @@ class Login extends Component {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
+                    <Col md={{ span: 6, offset: 3 }} className="card">
                         <h1 className="center">Logga in</h1>
-                    </Col>
-                    <Col md={{ span: 4, offset: 4 }}>
                         <Form className="login-form" onSubmit={this.handleSubmit}>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Epost</Form.Label>
@@ -108,7 +106,7 @@ class Login extends Component {
                                 </InputGroup>
                             </Form.Group>
                             <div className="center">
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" type="submit" className="form-button">
                                     Logga in
                                 </Button>
                             </div>

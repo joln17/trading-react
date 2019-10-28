@@ -30,13 +30,13 @@ class Asset extends Component {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 8, offset: 2 }}>
-                        <Chart asset={this.props.asset} data={this.props.histData} />
-                        <h1>
-                            ${this.props.rtData.value}
+                    <Col md={{ span: 6, offset: 3 }} className="card">
+                        <h1 className="right">
+                            {this.props.asset + ": $" + this.props.rtData.value}
                         </h1>
+                        <Chart asset={this.props.asset} data={this.props.histData} />
+                        <Trade asset={this.props.asset} rtData={this.props.rtData} />
                     </Col>
-                    <Trade asset={this.props.asset} rtData={this.props.rtData} />
                 </Row>
             </Container>
         );

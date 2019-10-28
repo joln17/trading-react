@@ -13,9 +13,9 @@ class Chart extends Component {
 
     render() {
         return (
-            <ResponsiveContainer height={300}>
+            <ResponsiveContainer height={250}>
                 <AreaChart data={this.props.data}
-                    margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
+                    margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
                     <defs>
                         <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.5} />

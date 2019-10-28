@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Button, ButtonToolbar, Col, Form } from 'react-bootstrap';
+import { Button, ButtonToolbar, Form } from 'react-bootstrap';
 
 import config from '../../config';
+
+import './Trade.css';
 
 class Trade extends Component {
     static propTypes = {
@@ -99,7 +101,8 @@ class Trade extends Component {
             return <Redirect to={this.state.redirect} />;
         }
         return (
-            <Col md={{ span: 4, offset: 4 }}>
+            <div>
+                <h3 className="center trade">Handla</h3>
                 <Form>
                     <Form.Group controlId="formQuantity">
                         <Form.Label>Antal</Form.Label>
@@ -132,7 +135,7 @@ class Trade extends Component {
                         </Button>
                     </ButtonToolbar>
                 </Form>
-            </Col>
+            </div>
         );
     }
 }

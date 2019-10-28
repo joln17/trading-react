@@ -87,10 +87,8 @@ class Deposit extends Component {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
+                    <Col md={{ span: 6, offset: 3 }} className="card">
                         <h1 className="center">Insättning</h1>
-                    </Col>
-                    <Col md={{ span: 4, offset: 4 }}>
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="formQuantity">
                                 <Form.Label>Belopp</Form.Label>
@@ -104,7 +102,7 @@ class Deposit extends Component {
                                 />
                             </Form.Group>
                             <div className="center">
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" type="submit" className="form-button">
                                     Genomför insättning
                                 </Button>
                             </div>

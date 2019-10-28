@@ -33,7 +33,7 @@ class Listings extends Component {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
+                    <Col md={{ span: 6, offset: 3 }} className="card">
                         <h1 className="center">Aktuella kurser</h1>
                         <ListingsTable
                             assets={this.props.assets}

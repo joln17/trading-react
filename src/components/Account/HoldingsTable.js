@@ -43,8 +43,7 @@ class HoldingsTable extends Component {
                 <tr key={key}>
                     <td><Link to={'/asset/' + asset.name}>{name}</Link></td>
                     <td className="right">{asset.quantity}</td>
-                    <td className="right">${currentPrice.toFixed(2)}</td>
-                    <td className="right">{change.toFixed(2)} %</td>
+                    <td className="right">{change.toFixed(2)}%</td>
                     <td className="right">${value.toFixed(2)}</td>
                 </tr>
             );
@@ -56,7 +55,6 @@ class HoldingsTable extends Component {
                     <tr>
                         <th>Namn</th>
                         <th className="right">Antal</th>
-                        <th className="right">Senast</th>
                         <th className="right">Avkastn.</th>
                         <th className="right">Värde</th>
                     </tr>
@@ -64,11 +62,11 @@ class HoldingsTable extends Component {
                 <tbody>
                     {holdingRows}
                     <tr>
-                        <td colSpan="4" className="right">Saldo</td>
+                        <td colSpan="3" className="right">Saldo</td>
                         <td className="right">${balance.toFixed(2)}</td>
                     </tr>
                     <tr>
-                        <td colSpan="4" className="right">Totalt värde</td>
+                        <td colSpan="3" className="right">Totalt värde</td>
                         <td className="right">${totalValue.toFixed(2)}</td>
                     </tr>
                 </tbody>

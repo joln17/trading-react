@@ -70,7 +70,7 @@ class Holdings extends Component {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
+                    <Col md={{ span: 6, offset: 3 }} className="card">
                         <h1 className="center">Innehav</h1>
                         <HoldingsTable
                             currentData={this.props.currentData}

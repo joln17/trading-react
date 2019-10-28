@@ -32,7 +32,7 @@ class Header extends Component {
 
         return (
             <header>
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="navbar">
+                <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark" className="navbar">
                     <Navbar.Brand as={Link} to="/">Kryptohandel</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
