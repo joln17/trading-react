@@ -26,10 +26,6 @@ class Listings extends Component {
     }
 
     render() {
-        if (Object.entries(this.props.currentData).length === 0) {
-            return null;
-        }
-
         return (
             <Container>
                 <Row>
