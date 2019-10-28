@@ -30,7 +30,7 @@
     position: absolute;
     top: calc(1.5em + .75rem + 2px);
     left: 0;
-    border: 1px solid #007bff;
+    border: 1px solid #42895C;
     border-radius: .25rem;
     padding: 5px;
     width: 290px;
@@ -64,11 +64,11 @@
 }
 
 .datepicker-day:hover {
-    outline: 1px solid #007bff;
+    outline: 1px solid #42895C;
 }
 
 .datepicker-day-selected {
-    color: #007bff;
+    color: #42895C;
     font-weight: bold;
 }
 

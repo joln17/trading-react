@@ -81,10 +81,8 @@ class Registration extends Component {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
+                    <Col md={{ span: 6, offset: 3 }} className="card">
                         <h1 className="center">Registrera nytt konto</h1>
-                    </Col>
-                    <Col md={{ span: 4, offset: 4 }}>
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group controlId="formName">
                                 <Form.Label>Namn</Form.Label>
