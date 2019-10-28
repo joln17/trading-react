@@ -14,7 +14,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha --timeout 20000 test/*.js",
-    "eject": "react-scripts eject",
     "deploy": "npm run build && rsync -av build/* joln17@droplet1:/var/www/trading.joln17.me/html/"
   },
   "eslintConfig": {
