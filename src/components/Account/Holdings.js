@@ -10,6 +10,7 @@ import HoldingsTable from './HoldingsTable';
 class Holdings extends Component {
     static propTypes = {
         connected: PropTypes.bool.isRequired,
+        token: PropTypes.string.isRequired,
         getCurrentData: PropTypes.func.isRequired,
         currentData: PropTypes.object.isRequired
     };
@@ -32,7 +33,7 @@ class Holdings extends Component {
         fetch(urlHoldings, {
             method: 'GET',
             headers: {
-                'x-access-token': localStorage.getItem('token'),
+                'x-access-token': this.props.token,
                 'Content-Type': 'application/json'
             },
         }).then(response => {
@@ -41,8 +42,8 @@ class Holdings extends Component {
             if (result.data) {
                 this.setState({ holdings: result.data });
             } else if (result.error) {
-                if (result.error.message === "Failed authentication") {
-                    localStorage.removeItem('token');
+                if (result.error.message === "Failed authentication" ||
+                    result.error.message === "No token provided") {
                     this.setState({ redirect: '/login' });
                 } else {
                     console.log(result.error);

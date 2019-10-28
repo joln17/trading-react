@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 
@@ -6,6 +7,10 @@ import config from '../../config';
 import DatePicker from './DatePicker/DatePicker';
 
 class Registration extends Component {
+    static propTypes = {
+        setToken: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
         this.log = this.log.bind(this);
@@ -66,7 +71,7 @@ class Registration extends Component {
             return response.json();
         }).then(result => {
             if (result.data && result.data.token) {
-                localStorage.setItem('token', result.data.token);
+                this.props.setToken(result.data.token);
                 this.setState({ redirect: '/deposit' });
             }
         }).catch(error => {

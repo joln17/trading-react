@@ -8,6 +8,7 @@ import Trade from './Trade';
 class Asset extends Component {
     static propTypes = {
         connected: PropTypes.bool.isRequired,
+        token: PropTypes.string.isRequired,
         asset: PropTypes.string.isRequired,
         getHistData: PropTypes.func.isRequired,
         histData: PropTypes.array.isRequired,
@@ -34,8 +35,15 @@ class Asset extends Component {
                         <h1 className="right">
                             {this.props.asset + ": $" + this.props.rtData.value}
                         </h1>
-                        <Chart asset={this.props.asset} data={this.props.histData} />
-                        <Trade asset={this.props.asset} rtData={this.props.rtData} />
+                        <Chart
+                            asset={this.props.asset}
+                            data={this.props.histData}
+                        />
+                        <Trade
+                            token= {this.props.token}
+                            asset={this.props.asset}
+                            rtData={this.props.rtData}
+                        />
                     </Col>
                 </Row>
             </Container>

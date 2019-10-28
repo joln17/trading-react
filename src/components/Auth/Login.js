@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 
@@ -7,6 +8,10 @@ import config from '../../config';
 import './Login.css';
 
 class Login extends Component {
+    static propTypes = {
+        setToken: PropTypes.func.isRequired
+    };
+
     constructor(props) {
         super(props);
         this.setPasswordVisibility = this.setPasswordVisibility.bind(this);
@@ -56,7 +61,7 @@ class Login extends Component {
             return response.json();
         }).then(result => {
             if (result.data && result.data.token) {
-                localStorage.setItem('token', result.data.token);
+                this.props.setToken(result.data.token);
                 this.setState({ redirect: '/holdings' });
             } else if (result.error) {
                 console.log(result.error);

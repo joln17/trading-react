@@ -7,6 +7,7 @@ import './Header.css';
 
 class Header extends Component {
     static propTypes = {
+        token: PropTypes.string.isRequired,
         location: PropTypes.object.isRequired
     };
 
@@ -14,7 +15,7 @@ class Header extends Component {
         let holdingsNav = null, depositNav = null, loginNav;
         const path = this.props.location.pathname.match(/^\/[^/]*/);
 
-        if (localStorage.getItem('token')) {
+        if (this.props.token) {
             holdingsNav = <Nav.Link as={Link} to="/holdings" active={path[0] === "/holdings"}>
                 Innehav
             </Nav.Link>;

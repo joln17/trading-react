@@ -20,6 +20,7 @@ class App extends Component {
         super(props);
         this.getCurrentData = this.getCurrentData.bind(this);
         this.getHistData = this.getHistData.bind(this);
+        this.setToken = this.setToken.bind(this);
 
         const assetsHist = {}, assetsRt = {};
 
@@ -30,6 +31,7 @@ class App extends Component {
 
         this.state = {
             connected: false,
+            token: '',
             currentData: {},
             rtData: {},
             ...assetsHist,
@@ -43,6 +45,10 @@ class App extends Component {
 
     getHistData(asset) {
         this.ws.send(asset);
+    }
+
+    setToken(token) {
+        this.setState({ token: token });
     }
 
     componentDidMount() {
@@ -97,6 +103,7 @@ class App extends Component {
                         <Asset
                             {...props}
                             connected={this.state.connected}
+                            token={this.state.token}
                             asset={asset}
                             getHistData={this.getHistData}
                             histData={this.state[asset + 'Hist']}
@@ -110,7 +117,7 @@ class App extends Component {
 
         return (
             <Router>
-                <Header />
+                <Header token={this.state.token} />
                 <Switch>
                     {assetRoutes}
                     <Route
@@ -132,15 +139,48 @@ class App extends Component {
                             <Holdings
                                 {...props}
                                 connected={this.state.connected}
+                                token={this.state.token}
                                 getCurrentData={this.getCurrentData}
                                 currentData={this.state.currentData}
                             />
                         }
                     />
-                    <Route exact path="/deposit" component={Deposit} />
-                    <Route exact path="/register" component={Registration} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/logout" component={Logout} />
+                    <Route
+                        exact path='/deposit'
+                        render={(props) =>
+                            <Deposit
+                                {...props}
+                                token={this.state.token}
+                            />
+                        }
+                    />
+                    <Route
+                        exact path='/register'
+                        render={(props) =>
+                            <Registration
+                                {...props}
+                                setToken={this.setToken}
+                            />
+                        }
+                    />
+                    <Route
+                        exact path='/login'
+                        render={(props) =>
+                            <Login
+                                {...props}
+                                setToken={this.setToken}
+                            />
+                        }
+                    />
+                    <Route
+                        exact path='/logout'
+                        render={(props) =>
+                            <Logout
+                                {...props}
+                                setToken={this.setToken}
+                            />
+                        }
+                    />
                 </Switch>
             </Router>
         );

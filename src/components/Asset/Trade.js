@@ -9,6 +9,7 @@ import './Trade.css';
 
 class Trade extends Component {
     static propTypes = {
+        token: PropTypes.string.isRequired,
         asset: PropTypes.string.isRequired,
         rtData: PropTypes.object.isRequired
     };
@@ -20,8 +21,7 @@ class Trade extends Component {
         this.state = {
             quantityInput: '',
             priceInput: '',
-            redirect: '',
-            isLoggedIn: false
+            redirect: ''
         };
     }
 
@@ -38,7 +38,7 @@ class Trade extends Component {
             fetch(urlDeposit, {
                 method: 'POST',
                 headers: {
-                    'x-access-token': localStorage.getItem('token'),
+                    'x-access-token': this.props.token,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
@@ -52,8 +52,8 @@ class Trade extends Component {
                 if (result.data) {
                     this.setState({ redirect: '/holdings' });
                 } else if (result.error) {
-                    if (result.error.message === "Failed authentication") {
-                        localStorage.removeItem('token');
+                    if (result.error.message === "Failed authentication" ||
+                        result.error.message === "No token provided") {
                         this.setState({ redirect: '/login' });
                     } else {
                         console.log(result.error);
@@ -65,36 +65,8 @@ class Trade extends Component {
         }
     }
 
-    componentDidMount() {
-        if (localStorage.getItem('token')) {
-            const urlVerifyLogin = config.baseURL + '/auth/verify-login';
-
-            fetch(urlVerifyLogin, {
-                method: 'GET',
-                headers: {
-                    'x-access-token': localStorage.getItem('token'),
-                    'Content-Type': 'application/json'
-                },
-            }).then(response => {
-                return response.json();
-            }).then(result => {
-                if (result.data) {
-                    this.setState({ isLoggedIn: true });
-                } else if (result.error) {
-                    if (result.error.message === "Failed authentication") {
-                        localStorage.removeItem('token');
-                    } else {
-                        console.log(result.error);
-                    }
-                }
-            }).catch(error => {
-                console.log("Request failed due to the following error: ", error.message);
-            });
-        }
-    }
-
     render() {
-        if (!this.state.isLoggedIn) {
+        if (!this.props.token) {
             return null;
         }
         if (this.state.redirect) {
