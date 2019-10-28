@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha --timeout 20000 test/*.js",
     "eject": "react-scripts eject",
     "deploy": "npm run build && rsync -av build/* joln17@droplet1:/var/www/trading.joln17.me/html/"
   },
@@ -31,5 +31,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "mocha": "^6.2.1",
+    "selenium-webdriver": "^3.6.0"
   }
 }
