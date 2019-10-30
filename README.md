@@ -1,3 +1,6 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/joln17/trading-react/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/joln17/trading-react/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/joln17/trading-react/badges/build.png?b=master)](https://scrutinizer-ci.com/g/joln17/trading-react/build-status/master)
+
 # Frontend för tradingprojektet i jsramverk
 En React-frontend för att att visa priser för kryptovalutor. Tänkt att användas tillsammans med backend-repona [trading-API](https://github.com/joln17/trading-api) för konto och depåhantering och [trading-ws](https://github.com/joln17/trading-ws) för att erhålla realtidspriser på valutorna.
 
