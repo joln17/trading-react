@@ -71,8 +71,13 @@ class App extends Component {
                 if (this.state[assetHist].length > 0) {
                     currentTS = this.state[assetHist][this.state[assetHist].length - 1].timestamp;
 
+                    // Save realtime data if it's more than 'interval' seconds
+                    // since data for the asset was saved last time
                     if (rtData.timestamp - currentTS >= interval * 1000) {
                         timeDiff = rtData.timestamp - this.state[assetHist][0].timestamp;
+
+                        // Remove first element from hist data if it's more than 'maxTime' seconds
+                        // between the first and last element in the array
                         index = timeDiff >= maxTime * 1000 ? 1 : 0;
                         this.setState(prevState => ({
                             [assetHist]: [...prevState[assetHist].slice(index), rtData]
@@ -90,7 +95,6 @@ class App extends Component {
         this.ws.onclose = () => {
             console.log('Disconnected.');
             this.setState({ connected: false });
-            // automatically try to reconnect on connection loss
         };
     }
 
