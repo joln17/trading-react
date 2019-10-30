@@ -91,6 +91,10 @@ h1 {
     margin: 1rem .25rem;
 }
 
+.alert {
+    margin: 1rem 0;
+}
+
 .red-text {
     color: red;
 }

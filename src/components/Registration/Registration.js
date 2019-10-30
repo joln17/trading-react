@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
+import { Alert, Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 
 import config from '../../config';
 import DatePicker from './DatePicker/DatePicker';
@@ -73,6 +73,12 @@ class Registration extends Component {
             if (result.data && result.data.token) {
                 this.props.setToken(result.data.token);
                 this.setState({ redirect: '/deposit' });
+            } else if (result.error) {
+                if (result.error.message === "Email is already registered") {
+                    this.setState({ alert: true });
+                } else {
+                    console.log(result.error);
+                }
             }
         }).catch(error => {
             console.log("Request failed due to the following error: ", error.message);
@@ -83,6 +89,12 @@ class Registration extends Component {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />;
         }
+        const alert = this.state.alert ?
+            <Alert variant="danger">
+                Epost-adressen finns redan registrerad.
+            </Alert> :
+            null;
+
         return (
             <Container>
                 <Row>
@@ -153,6 +165,7 @@ class Registration extends Component {
                                 </Button>
                             </div>
                         </Form>
+                        {alert}
                     </Col>
                 </Row>
             </Container>

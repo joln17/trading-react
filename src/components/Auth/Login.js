@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
+import { Alert, Button, Col, Container, Form, InputGroup, Row } from 'react-bootstrap';
 
 import config from '../../config';
 
@@ -22,7 +22,8 @@ class Login extends Component {
             passwordInput: '',
             passwordInputType: 'password',
             passwordInputIcon: 'visibility',
-            redirect: ''
+            redirect: '',
+            alert: false
         };
     }
 
@@ -64,7 +65,11 @@ class Login extends Component {
                 this.props.setToken(result.data.token);
                 this.setState({ redirect: '/holdings' });
             } else if (result.error) {
-                console.log(result.error);
+                if (result.error.message === "Email or password is wrong") {
+                    this.setState({ alert: true });
+                } else {
+                    console.log(result.error);
+                }
             }
         }).catch(error => {
             console.log("Request failed due to the following error: ", error.message);
@@ -75,6 +80,12 @@ class Login extends Component {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />;
         }
+        const alert = this.state.alert ?
+            <Alert variant="danger">
+                Fel användarnamn eller lösenord.
+            </Alert> :
+            null;
+
         return (
             <Container>
                 <Row>
@@ -119,6 +130,7 @@ class Login extends Component {
                         <div className="center">
                             Inget konto? <Link to="/register">Skapa konto.</Link>
                         </div>
+                        {alert}
                     </Col>
                 </Row>
             </Container>

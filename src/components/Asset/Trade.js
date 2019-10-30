@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Button, ButtonToolbar, Form } from 'react-bootstrap';
+import { Alert, Button, ButtonToolbar, Form } from 'react-bootstrap';
 
 import config from '../../config';
 
@@ -21,7 +21,8 @@ class Trade extends Component {
         this.state = {
             quantityInput: '',
             priceInput: '',
-            redirect: ''
+            redirect: '',
+            alert: false
         };
     }
 
@@ -55,6 +56,8 @@ class Trade extends Component {
                     if (result.error.message === "Failed authentication" ||
                         result.error.message === "No token provided") {
                         this.setState({ redirect: '/login' });
+                    } else if (result.error.message === "Insufficient funds") {
+                        this.setState({ alert: true });
                     } else {
                         console.log(result.error);
                     }
@@ -72,6 +75,12 @@ class Trade extends Component {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />;
         }
+        const alert = this.state.alert ?
+            <Alert variant="danger">
+                Otillräckligt med medel på kontot.
+            </Alert> :
+            null;
+
         return (
             <div>
                 <h3 className="center trade">Handla</h3>
@@ -107,6 +116,7 @@ class Trade extends Component {
                         </Button>
                     </ButtonToolbar>
                 </Form>
+                {alert}
             </div>
         );
     }
