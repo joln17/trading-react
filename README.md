@@ -24,7 +24,7 @@ Sajten är uppdelad i följande sidor och komponenter:
 * [Inloggningssida](https://trading.joln17.me/login). (Källkod i [src/components/Auth](https://github.com/joln17/trading-react/tree/master/src/components/Auth)).
 * [Registreringssida](https://trading.joln17.me/register). (Källkod i [src/components/Registration](https://github.com/joln17/trading-react/tree/master/src/components/Registration)).
 * [Sida för innehav](https://trading.joln17.me/holdings) som visar de kryptovalutor som köpts, procentuell avkastning samt tillgängligt saldo och totalt värde. (Källkod i [src/components/Account](https://github.com/joln17/trading-react/tree/master/src/components/Account)).
-* [Sida för insättning](https://trading.joln17.me/deposit) av pengar i USD. (Källkod i [src/components/Account](https://github.com/joln17/trading-react/tree/master/src/components/Account)).
+* [Sida för insättning](https://trading.joln17.me/deposit) av (fiktiva) pengar i USD. (Källkod i [src/components/Account](https://github.com/joln17/trading-react/tree/master/src/components/Account)).
 
 ## Tester
 Fem funktionstester med Selenium finns i [test-katalogen](https://github.com/joln17/trading-react/tree/master/test):
